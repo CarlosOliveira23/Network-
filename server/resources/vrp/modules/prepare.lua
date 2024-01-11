@@ -1,3 +1,32 @@
+ -----------------------------------------------------------------------------------------------------------------------------------------
+-- PRISON
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.Prepare("prison/Clean", "DELETE FROM police_prison WHERE nuser_id = @nuser_id")
+vRP.Prepare("prison/Personal", "SELECT * FROM police_prison WHERE nuser_id = @nuser_id ORDER BY id DESC")
+vRP.Prepare("prison/Get", "SELECT * FROM police_prison WHERE id = @id ORDER BY id DESC")
+vRP.Prepare("prison/Insert","INSERT INTO police_prison(police,nuser_id,services,fines,text,date,cops,association,residual,url) VALUES(@police,@nuser_id,@services,@fines,@text,@date,@cops,@association,@residual,@url)")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GUNLICENSE
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.Prepare("gunlicense/Insert","INSERT INTO police_gunlicense(identity,user_id,portType,serial,nidentity,date,weapon,exam) VALUES(@identity,@user_id,@portType,@serial,@nidentity,@date,@weapon,@exam)")
+vRP.Prepare("gunlicense/List", "SELECT * FROM police_gunlicense ORDER BY portId DESC")
+vRP.Prepare("gunlicense/Personal", "SELECT * FROM police_gunlicense WHERE portId = @portId")
+vRP.Prepare("gunlicense/Update", "UPDATE police_gunlicense SET identity = @identity,user_id = @user_id,portType = @portType,serial = @serial,nidentity = @nidentity,date = @date,weapon = @weapon,exam = @exam WHERE portId = @portId")
+vRP.Prepare("gunlicense/Remove", "DELETE FROM police_gunlicense WHERE portId = @portId")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- REPORTS
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.Prepare("reports/List", "SELECT * FROM police_reports ORDER BY id DESC")
+vRP.Prepare("reports/Solved", "UPDATE police_reports SET solved = 0, updated_at = @updated_at WHERE id = @id")
+vRP.Prepare("reports/Insert", "INSERT INTO police_reports(victim_id, police_name, solved, victim_name, created_at, victim_report, updated_at) VALUES(@victim_id, @police_name, @solved, @victim_name, @created_at, @victim_report, @updated_at)")
+vRP.Prepare("reports/Remove", "DELETE FROM police_reports WHERE id = @id")
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WARRANTS
+-----------------------------------------------------------------------------------------------------------------------------------------
+vRP.Prepare("warrants/List", "SELECT * FROM police_warrants ORDER BY id DESC")
+vRP.Prepare("warrants/Personal", "SELECT * FROM police_warrants WHERE id = @id")
+vRP.Prepare("warrants/Remove", "DELETE FROM police_warrants WHERE id = @id")
+vRP.Prepare("warrants/Insert", "INSERT INTO police_warrants(user_id, identity, status, nidentity, timeStamp, reason) VALUES(@user_id, @identity, @status, @nidentity, @timeStamp, @reason)")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CHARACTERS
 -----------------------------------------------------------------------------------------------------------------------------------------
